@@ -15,17 +15,17 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/api/stats', [DashboardController::class, 'getStats']);
         
-        Route::get('/registrasi-petugas', function () {
-            return view('registrasi_petugas');
-        });
+        Route::get('/registrasi-petugas', [\App\Http\Controllers\UserController::class, 'index'])->name('user.index');
+        Route::post('/registrasi-petugas', [\App\Http\Controllers\UserController::class, 'store'])->name('user.store');
+        Route::put('/registrasi-petugas/{user}', [\App\Http\Controllers\UserController::class, 'update'])->name('user.update');
+        Route::delete('/registrasi-petugas/{user}', [\App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
 
-        Route::get('/pendataan-barang', function () {
-            return view('pendataan_barang');
-        });
+        Route::get('/pendataan-barang', [\App\Http\Controllers\MenuController::class, 'index'])->name('menu.index');
+        Route::post('/pendataan-barang', [\App\Http\Controllers\MenuController::class, 'store'])->name('menu.store');
+        Route::put('/pendataan-barang/{menu}', [\App\Http\Controllers\MenuController::class, 'update'])->name('menu.update');
+        Route::delete('/pendataan-barang/{menu}', [\App\Http\Controllers\MenuController::class, 'destroy'])->name('menu.destroy');
 
-        Route::get('/stok-barang', function () {
-            return view('stok_barang');
-        });
+        Route::get('/stok-barang', [\App\Http\Controllers\StockController::class, 'index'])->name('stock.index');
     });
 
     // Kasir Routes
@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::get('/transaksi-kasir', [\App\Http\Controllers\TransactionController::class, 'index'])->name('transaksi.index');
+        Route::get('/riwayat-transaksi', [\App\Http\Controllers\TransactionController::class, 'history'])->name('transaksi.history');
         Route::post('/api/transactions', [\App\Http\Controllers\TransactionController::class, 'store']);
 
         Route::get('/stok-barang-kasir', function () {

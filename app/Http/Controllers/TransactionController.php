@@ -52,24 +52,49 @@ class TransactionController extends Controller
                 'status' => 'success'
             ]);
 
+            $details = [];
             foreach ($itemsToProcess as $item) {
-                $transaction->details()->create($item);
+                $detail = $transaction->details()->create($item);
+                $details[] = [
+                    'name' => Menu::find($item['menu_id'])->name,
+                    'quantity' => $item['quantity'],
+                    'price' => $item['price']
+                ];
             }
 
             return response()->json([
                 'success' => true,
                 'message' => 'Transaksi berhasil diproses.',
-                'transaction_id' => $transaction->id
+                'data' => [
+                    'transaction_id' => $transaction->id,
+                    'total' => $totalPrice,
+                    'items' => $details,
+                    'time' => $transaction->created_at->format('d M Y H:i')
+                ]
             ]);
         });
     }
 
     /**
-     * Display the transaction page (for Kasir).
+     * Display the transaction page (Advanced POS).
      */
     public function index()
     {
         $menus = Menu::with('category', 'stock')->get();
-        return view('transaksi_kasir', compact('menus'));
+        $categories = \App\Models\Category::all();
+        return view('transaksi_kasir', compact('menus', 'categories'));
+    }
+
+    /**
+     * Display transaction history for the logged in user.
+     */
+    public function history()
+    {
+        $transactions = Transaction::with(['details.menu'])
+            ->where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+            
+        return view('riwayat_transaksi', compact('transactions'));
     }
 }

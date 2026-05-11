@@ -17,6 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <style>
         [x-cloak] { display: none !important; }
@@ -31,12 +32,13 @@
             <div class="w-10 h-10 bg-brand-gold rounded-xl flex items-center justify-center shadow-lg">
                 <i class="ph-fill ph-storefront text-brand-maroon text-2xl"></i>
             </div>
-            <span class="font-montserrat font-bold text-xl tracking-tight">RAZQH POS</span>
+            <span class="font-montserrat font-bold text-lg tracking-tight leading-tight">Rumah Makan<br>Padang</span>
         </div>
 
         <nav class="flex-1 px-4 mt-4 space-y-2 overflow-y-auto">
             <p class="text-white/40 text-xs font-bold uppercase tracking-widest px-4 mb-4">Utama</p>
             
+            @if(auth()->user()->role === 'admin')
             <a href="{{ route('dashboard') }}" class="group flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 {{ request()->routeIs('dashboard') ? 'bg-white/10 border-l-4 border-brand-gold text-brand-gold' : 'text-white/70 hover:bg-white/5 hover:text-white' }}">
                 <i class="ph ph-squares-four text-xl"></i>
                 <span class="font-medium">Dashboard</span>
@@ -44,27 +46,35 @@
 
             <p class="text-white/40 text-xs font-bold uppercase tracking-widest px-4 mt-8 mb-4">Manajemen</p>
             
-            <a href="/pendataan-barang" class="group flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 {{ request()->is('pendataan-barang') ? 'bg-white/10 border-l-4 border-brand-gold text-brand-gold' : 'text-white/70 hover:bg-white/5 hover:text-white' }}">
+            <a href="{{ route('menu.index') }}" class="group flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 {{ request()->routeIs('menu.index') ? 'bg-white/10 border-l-4 border-brand-gold text-brand-gold' : 'text-white/70 hover:bg-white/5 hover:text-white' }}">
                 <i class="ph ph-package text-xl"></i>
                 <span class="font-medium">Menu & Kategori</span>
             </a>
 
-            <a href="/stok-barang" class="group flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 {{ request()->is('stok-barang') ? 'bg-white/10 border-l-4 border-brand-gold text-brand-gold' : 'text-white/70 hover:bg-white/5 hover:text-white' }}">
+            <a href="{{ route('stock.index') }}" class="group flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 {{ request()->routeIs('stock.index') ? 'bg-white/10 border-l-4 border-brand-gold text-brand-gold' : 'text-white/70 hover:bg-white/5 hover:text-white' }}">
                 <i class="ph ph-stack text-xl"></i>
                 <span class="font-medium">Stok Barang</span>
             </a>
 
-            <a href="/registrasi-petugas" class="group flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 {{ request()->is('registrasi-petugas') ? 'bg-white/10 border-l-4 border-brand-gold text-brand-gold' : 'text-white/70 hover:bg-white/5 hover:text-white' }}">
+            <a href="{{ route('user.index') }}" class="group flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 {{ request()->routeIs('user.index') ? 'bg-white/10 border-l-4 border-brand-gold text-brand-gold' : 'text-white/70 hover:bg-white/5 hover:text-white' }}">
                 <i class="ph ph-users-three text-xl"></i>
                 <span class="font-medium">Petugas</span>
             </a>
+            @endif
 
-            <p class="text-white/40 text-xs font-bold uppercase tracking-widest px-4 mt-8 mb-4">Laporan</p>
+            @if(auth()->user()->role === 'kasir' || auth()->user()->role === 'admin')
+            <p class="text-white/40 text-xs font-bold uppercase tracking-widest px-4 mt-8 mb-4">Transaksi</p>
             
-            <a href="#" class="group flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 text-white/70 hover:bg-white/5 hover:text-white">
-                <i class="ph ph-chart-line-up text-xl"></i>
-                <span class="font-medium">Laporan Penjualan</span>
+            <a href="{{ route('transaksi.index') }}" class="group flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 {{ request()->routeIs('transaksi.index') ? 'bg-white/10 border-l-4 border-brand-gold text-brand-gold' : 'text-white/70 hover:bg-white/5 hover:text-white' }}">
+                <i class="ph ph-shopping-cart text-xl"></i>
+                <span class="font-medium">Kasir POS</span>
             </a>
+
+            <a href="{{ route('transaksi.history') }}" class="group flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 {{ request()->routeIs('transaksi.history') ? 'bg-white/10 border-l-4 border-brand-gold text-brand-gold' : 'text-white/70 hover:bg-white/5 hover:text-white' }}">
+                <i class="ph ph-clock-counter-clockwise text-xl"></i>
+                <span class="font-medium">Riwayat</span>
+            </a>
+            @endif
         </nav>
 
         <div class="p-6">

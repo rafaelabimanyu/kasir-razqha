@@ -25,7 +25,7 @@
             <div class="w-20 h-20 bg-brand-maroon rounded-3xl flex items-center justify-center shadow-lg mb-6">
                 <i class="ph-fill ph-storefront text-brand-gold text-4xl"></i>
             </div>
-            <h1 class="font-montserrat font-bold text-2xl text-brand-maroon tracking-tight">RAZQH POS</h1>
+            <h1 class="font-montserrat font-bold text-2xl text-brand-maroon tracking-tight text-center">Rumah Makan<br>Padang</h1>
             <p class="text-gray-400 text-sm font-medium mt-2">Masuk ke sistem kasir</p>
         </div>
 
