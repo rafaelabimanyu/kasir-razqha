@@ -1,58 +1,69 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🍱 Sistem Kasir Rumah Makan Padang
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem Kasir Rumah Makan Padang adalah aplikasi Point of Sales (POS) berbasis web yang dirancang khusus untuk manajemen operasional restoran Padang secara modern, efisien, dan profesional. Aplikasi ini menggabungkan estetika premium dengan performa tinggi untuk memberikan pengalaman terbaik bagi admin maupun kasir.
 
-## About Laravel
+## 🚀 Fitur Unggulan
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Advanced POS System**: Antarmuka penjualan yang seamless tanpa reload halaman (Single Page Feel) menggunakan Alpine.js.
+- **Real-time Dashboard**: Visualisasi data penjualan 30 hari terakhir dengan grafik interaktif menggunakan ApexCharts.
+- **Role-Based Access Control (RBAC)**: Pembatasan akses fitur antara Administrator dan Petugas/Kasir untuk keamanan data.
+- **Automated Stock Management**: Pengurangan stok otomatis setiap kali transaksi berhasil dengan integritas database yang kuat.
+- **Visual Grid Management**: Pengelolaan menu dengan tampilan grid card modern yang informatif.
+- **Responsive Design**: Tampilan yang optimal di berbagai perangkat (Desktop, Tablet, dan Mobile).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Aplikasi ini dibangun menggunakan teknologi terkini:
+- **Backend**: Laravel 11 (PHP 8.2+)
+- **Frontend**: Tailwind CSS 4, Alpine.js 3
+- **Database**: MySQL / MariaDB
+- **Charts**: ApexCharts
+- **Icons**: Phosphor Icons
+- **Notifications**: SweetAlert2
 
-## Learning Laravel
+## 📦 Instalasi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Ikuti langkah-langkah berikut untuk menjalankan proyek di lingkungan lokal Anda:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. **Clone Repositori**
+   ```bash
+   git clone https://github.com/username/kasir-razqha.git
+   cd kasir-razqha
+   ```
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+2. **Instal Dependensi**
+   ```bash
+   composer install
+   npm install
+   ```
 
-## Agentic Development
+3. **Konfigurasi Environment**
+   Salin file `.env.example` menjadi `.env` dan sesuaikan konfigurasi database Anda.
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+4. **Migrasi dan Seeding**
+   Jalankan migrasi database beserta data dummy realistis (30 hari riwayat transaksi).
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
 
-```bash
-composer require laravel/boost --dev
+5. **Jalankan Aplikasi**
+   ```bash
+   php artisan serve
+   npm run dev
+   ```
 
-php artisan boost:install
-```
+## 📂 Struktur Folder Utama
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+- `app/Http/Controllers`: Logika bisnis utama (Auth, Dashboard, Menu, Transaction).
+- `app/Models`: Definisi skema database dan relasi Eloquent (Menu, Stock, Transaction, dll).
+- `app/Http/Middleware`: Kontrol akses berbasis role (`RoleMiddleware`).
+- `resources/views`: Template antarmuka menggunakan Blade & Alpine.js.
+- `resources/css/app.css`: Definisi sistem desain (Maroon-Gold theme & Glassmorphism).
+- `database/seeders`: Simulasi data operasional masakan Padang.
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+Dikembangkan dengan ❤️ untuk kemajuan UMKM Kuliner Indonesia.
