@@ -14,6 +14,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:admin'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/api/stats', [DashboardController::class, 'getStats']);
+        Route::get('/admin/guide', [\App\Http\Controllers\GuideController::class, 'admin'])->name('admin.guide');
         
         Route::get('/registrasi-petugas', [\App\Http\Controllers\UserController::class, 'index'])->name('user.index');
         Route::post('/registrasi-petugas', [\App\Http\Controllers\UserController::class, 'store'])->name('user.store');
@@ -36,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/transaksi-kasir', [\App\Http\Controllers\TransactionController::class, 'index'])->name('transaksi.index');
         Route::get('/riwayat-transaksi', [\App\Http\Controllers\TransactionController::class, 'history'])->name('transaksi.history');
+        Route::get('/kasir/guide', [\App\Http\Controllers\GuideController::class, 'kasir'])->name('kasir.guide');
         Route::post('/api/transactions', [\App\Http\Controllers\TransactionController::class, 'store']);
 
         Route::get('/stok-barang-kasir', function () {

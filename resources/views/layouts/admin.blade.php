@@ -75,6 +75,16 @@
                 <span class="font-medium">Riwayat</span>
             </a>
             @endif
+
+            <p class="text-white/40 text-xs font-bold uppercase tracking-widest px-4 mt-8 mb-4">Dukungan</p>
+            
+            @php
+                $guideRoute = auth()->user()->role === 'admin' ? 'admin.guide' : 'kasir.guide';
+            @endphp
+            <a href="{{ route($guideRoute) }}" class="group flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 {{ request()->routeIs($guideRoute) ? 'bg-white/10 border-l-4 border-brand-gold text-brand-gold' : 'text-white/70 hover:bg-white/5 hover:text-white' }}">
+                <i class="ph ph-question text-xl"></i>
+                <span class="font-medium">Pusat Bantuan</span>
+            </a>
         </nav>
 
         <div class="p-6">
