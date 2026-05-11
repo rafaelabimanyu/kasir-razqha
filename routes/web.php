@@ -1,44 +1,44 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-use Illuminate\Http\Request;
+Route::middleware(['auth'])->group(function () {
+    
+    // Admin Routes
+    Route::middleware(['role:admin'])->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/api/stats', [DashboardController::class, 'getStats']);
+        
+        Route::get('/registrasi-petugas', function () {
+            return view('registrasi_petugas');
+        });
 
-Route::post('/login', function (Request $request) {
-    if ($request->input('role') === 'kasir') {
-        return redirect('/dashboard-kasir');
-    }
-    return redirect('/dashboard');
-});
+        Route::get('/pendataan-barang', function () {
+            return view('pendataan_barang');
+        });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+        Route::get('/stok-barang', function () {
+            return view('stok_barang');
+        });
+    });
 
-Route::get('/dashboard-kasir', function () {
-    return view('dashboard_kasir');
-});
+    // Kasir Routes
+    Route::middleware(['role:kasir,admin'])->group(function () {
+        Route::get('/dashboard-kasir', function () {
+            return view('dashboard_kasir');
+        });
 
-Route::get('/registrasi-petugas', function () {
-    return view('registrasi_petugas');
-});
+        Route::get('/transaksi-kasir', [\App\Http\Controllers\TransactionController::class, 'index'])->name('transaksi.index');
+        Route::post('/api/transactions', [\App\Http\Controllers\TransactionController::class, 'store']);
 
-Route::get('/pendataan-barang', function () {
-    return view('pendataan_barang');
-});
-
-Route::get('/stok-barang', function () {
-    return view('stok_barang');
-});
-
-Route::get('/transaksi-kasir', function () {
-    return view('transaksi_kasir');
-});
-
-Route::get('/stok-barang-kasir', function () {
-    return view('stok_barang_kasir');
+        Route::get('/stok-barang-kasir', function () {
+            return view('stok_barang_kasir');
+        });
+    });
 });

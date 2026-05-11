@@ -6,6 +6,54 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Brand Colors */
+    --color-brand-maroon: #5B121C;
+    --color-brand-maroon-light: #7D1A27;
+    --color-brand-gold: #D4AF37;
+    --color-brand-gold-soft: #E5C76B;
+    --color-brand-offwhite: #F8F9FA;
+    
+    /* Typography */
+    --font-sans: 'Inter', 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+    
+    /* Borders & Shadows */
+    --radius-2xl: 16px;
+    --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+@utility glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+@utility maroon-gradient {
+    background: linear-gradient(135deg, #5B121C 0%, #3D0C13 100%);
+}
+
+@utility skeleton {
+    @apply bg-gray-200 animate-pulse rounded;
+}
+
+@layer base {
+    body {
+        @apply bg-brand-offwhite text-gray-800 font-sans;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
 }
